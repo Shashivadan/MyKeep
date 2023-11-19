@@ -40,23 +40,27 @@ function formValudation(){
         description.value = ""
     }
 }
-
 let note_data = {}
-
+let note_arr = []
 
 function addNote(){
     note_data = {
         title: title.value,
         description: description.value
     }
+    note_arr.push(note_data)
 }
+localStorage.setItem("takenNotes",note_arr)
+
+
+
 
 
 function displayNoteData(){
    let displayNote = `<div class="note_taken h-fit w-80  bg-slate-100 drop-shadow-lg rounded-xl border-2 p-3 flex flex-col justify-between max-sm:w-full">
     <div class="content">
       <div class="display_title font-mono font-extrabold bg-slate-300 px-2 w-fit rounded-lg">${note_data.title}</div>
-      <div class="content_description w-72 bg-slate-100 resize-none h-fit my-3 max-sm:w-full" contenteditable="false" >${note_data.description}</div>
+      <div class="content_description w-72 bg-slate-100 resize-none h-fit my-3 max-sm:w-full"  >${note_data.description}</div>
      </div>
     <div class="icons flex  justify-end">
       <div class="delete mr-3 ">
@@ -86,7 +90,8 @@ function editing(){
     let content_description = document.querySelectorAll(".content_description")
     edit_botton.forEach((ele , i) => {
         ele.addEventListener("click",()=>{
-            content_description[i].setAttribute("contenteditable","true")
+            content_description[i].toggleAttribute("contenteditable")
         })
     })
 }
+
